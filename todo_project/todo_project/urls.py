@@ -12,6 +12,7 @@ urlpatterns = [
     # ✅ Task-related routes
     path('tasks/', views.task_list, name='task_list'),
     path('add/', views.add_task, name='add_task'),
+    path('tasks/edit/<int:id>/', views.edit_task, name='edit_task'), 
     path('update/<int:task_id>/', views.update_task, name='update_task'),
     path('delete/<int:task_id>/', views.delete_task, name='delete_task'),
 

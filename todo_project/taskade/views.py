@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import TODOO
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from .forms import TaskForm
 
 # User Signup
 def signup_user(request):
@@ -53,6 +54,18 @@ def update_task(request, task_id):
     task.completed = not task.completed  # ✅ Now `completed` exists in `models.py`
     task.save()
     return redirect('task_list')
+
+
+def edit_task(request, id):
+    task = get_object_or_404(TODOO, id=id)
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('task_list')  # Redirect to task list after editing
+    else:
+        form = TaskForm(instance=task)
+    return render(request, 'tasks/edit_task.html', {'form': form})
 
 # Delete Task
 @login_required
