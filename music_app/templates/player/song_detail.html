@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="card shadow-lg border-0">
+    <div class="card-body text-center">
+      <h3 class="card-title mb-3">{{ song.title }}</h3>
+      <h5 class="text-muted">Artist: {{ song.artist }}</h5>
+      <p class="mb-2">Album: {{ song.album }}</p>
+
+      <audio controls class="mt-4 w-100">
+        <source src="{{ song.audio_file.url }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="{% url 'home' %}" class="btn btn-outline-secondary">Back to Home</a>
+  </div>
+</div>
+
+{% endblock %}

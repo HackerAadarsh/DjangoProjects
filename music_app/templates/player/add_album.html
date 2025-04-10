@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-warning text-dark text-center">
+          <h4>Add New Album</h4>
+        </div>
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label class="form-label">Album Title</label>
+              {{ form.title|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Artist</label>
+              {{ form.artist|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Cover Image</label>
+              {{ form.cover_image|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Release Date</label>
+              {{ form.release_date|add_class:"form-control" }}
+            </div>
+
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-warning btn-lg text-white">Add Album</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

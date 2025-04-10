@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center">
+          <h4>Add New Artist</h4>
+        </div>
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label class="form-label">Artist Name</label>
+              {{ form.name|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Biography</label>
+              {{ form.bio|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Image</label>
+              {{ form.image|add_class:"form-control" }}
+            </div>
+
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary btn-lg">Add Artist</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home - MusicHub{% endblock %}
+
+{% block content %}
+<h1 class="mb-4 text-center">🎶 Welcome to MusicHub</h1>
+
+<!-- Latest Songs -->
+<h3>Latest Songs</h3>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for song in songs %}
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+
+      <!-- Show cover image if available -->
+      {% if song.cover_image %}
+        <img src="{{ song.cover_image.url }}" class="card-img-top" alt="{{ song.title }}">
+      {% else %}
+        <img src="{% static 'default_cover.jpg' %}" class="card-img-top" alt="No Cover">
+      {% endif %}
+
+      <audio controls class="w-100 mt-2">
+        <source src="{{ song.audio_file.url }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+
+      <div class="card-body">
+        <h5 class="card-title">{{ song.title }}</h5>
+        <p class="card-text">By {{ song.artist.name }}</p>
+        <a href="{% url 'song_detail' song.id %}" class="btn btn-outline-primary btn-sm">Details</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p>No songs available yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

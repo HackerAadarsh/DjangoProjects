@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">All Albums</h2>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for album in albums %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          {% if album.cover_image %}
+            <img src="{{ album.cover_image.url }}" class="card-img-top" alt="{{ album.title }}">
+          {% else %}
+            <img src="https://via.placeholder.com/300x200?text=No+Cover" class="card-img-top" alt="No Cover">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ album.title }}</h5>
+            <p class="card-text">By {{ album.artist.name }}</p>
+          </div>
+          <div class="card-footer text-center">
+            <a href="{% url 'album_detail' album.id %}" class="btn btn-outline-primary">View Album</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-center">No albums found.</p>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

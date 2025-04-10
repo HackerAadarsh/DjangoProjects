@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-success text-white text-center">
+          <h4>Upload New Song</h4>
+        </div>
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label class="form-label">Song Title</label>
+              {{ form.title|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Artist</label>
+              {{ form.artist|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Album</label>
+              {{ form.album|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Audio File</label>
+              {{ form.audio_file|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Cover Image</label>
+              {{ form.cover_image|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Duration (hh:mm:ss)</label>
+              {{ form.duration|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Genre</label>
+              {{ form.genre|add_class:"form-control" }}
+            </div>
+
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-success btn-lg">Upload Song</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

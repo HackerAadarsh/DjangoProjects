@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-4 text-center">
+      {% if album.cover_image %}
+        <img src="{{ album.cover_image.url }}" class="img-fluid rounded shadow" alt="{{ album.title }}">
+      {% else %}
+        <img src="https://via.placeholder.com/300x300?text=No+Cover" class="img-fluid rounded shadow" alt="No Cover">
+      {% endif %}
+      <h3 class="mt-3">{{ album.title }}</h3>
+      <p class="text-muted">By {{ album.artist.name }}</p>
+    </div>
+
+    <div class="col-md-8">
+      <h4>Songs in this Album</h4>
+      <ul class="list-group list-group-flush">
+        {% for song in album.songs.all %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ song.title }}
+            <a href="{% url 'song_detail' song.id %}" class="btn btn-sm btn-outline-success">Listen</a>
+          </li>
+        {% empty %}
+          <li class="list-group-item text-muted">No songs available in this album.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
